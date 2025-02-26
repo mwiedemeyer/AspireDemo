@@ -6,7 +6,7 @@ var builder = FunctionsApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.AddCosmosDbContext<AppDbContext>("cosmo", "db");
+builder.AddCosmosDbContext<AppDbContext>("cosmos", "db");
 
 builder.ConfigureFunctionsWebApplication();
 
