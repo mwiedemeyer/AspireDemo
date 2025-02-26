@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Sdk Name="Aspire.AppHost.Sdk" Version="9.1.0" />
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsAspireHost>true</IsAspireHost>
+		<UserSecretsId>b5f3512e-66a7-44e9-8c23-8c5c6e735206</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
+		<PackageReference Include="Aspire.Hosting.Azure.CosmosDB" Version="9.1.0" />
+		<PackageReference Include="Aspire.Hosting.Azure.Functions" Version="9.0.0-preview.5.24551.3" />
+		<PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="9.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AspireDemo\AspireDemo.csproj" />
+	</ItemGroup>
+
+</Project>
