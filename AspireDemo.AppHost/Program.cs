@@ -27,4 +27,9 @@ builder.AddAzureFunctionsProject<Projects.AspireDemo>("func")
         context.EnvironmentVariables["Aspire__Microsoft__EntityFrameworkCore__Cosmos__AppDbContext__ConnectionString"] = cosmos.Resource.ConnectionStringExpression;
     });
 
+builder.AddProject<Projects.SetupDatabase>("setupdatabase")
+    .WithReference(cosmos)
+    .WaitFor(cosmos)
+    .WithExplicitStart();
+
 builder.Build().Run();
