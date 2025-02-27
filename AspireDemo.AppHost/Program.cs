@@ -4,9 +4,10 @@ var nosecret = builder.AddParameter("NoSecret");
 var apiKey = builder.AddParameter("OpenAIApiKey", secret: true);
 
 var cosmos = builder.AddAzureCosmosDB("cosmos")
-                    .RunAsPreviewEmulator(p => p.WithDataExplorer().WithDataVolume().WithLifetime(ContainerLifetime.Persistent))
-                    .AddCosmosDatabase("db")
-                    .AddContainer("users", "/id");
+                    .RunAsPreviewEmulator(p => p.WithDataExplorer().WithDataVolume().WithLifetime(ContainerLifetime.Persistent));
+
+cosmos.AddCosmosDatabase("db")
+        .AddContainer("users", "/id");
 
 var sb = builder.AddAzureServiceBus("sb")
                     .RunAsEmulator(p => p.WithLifetime(ContainerLifetime.Persistent))
@@ -19,6 +20,11 @@ builder.AddAzureFunctionsProject<Projects.AspireDemo>("func")
     .WithReference(sb)
     .WaitFor(sb)
     .WithEnvironment("NoSecret", nosecret)
-    .WithEnvironment("OpenAIApiKey", apiKey);
+    .WithEnvironment("OpenAIApiKey", apiKey)
+    // workaround for https://github.com/dotnet/aspire/issues/7785
+    .WithEnvironment(context =>
+    {
+        context.EnvironmentVariables["Aspire__Microsoft__EntityFrameworkCore__Cosmos__AppDbContext__ConnectionString"] = cosmos.Resource.ConnectionStringExpression;
+    });
 
 builder.Build().Run();
