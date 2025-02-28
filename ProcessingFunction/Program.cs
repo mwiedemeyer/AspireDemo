@@ -1,15 +1,11 @@
-using AspireDemo;
 using Microsoft.Azure.Functions.Worker.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = FunctionsApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.AddCosmosDbContext<AppDbContext>("cosmos", "db");
-
-builder.AddAzureServiceBusClient("sb");
+//builder.AddAzureServiceBusClient("sb");
 
 builder.ConfigureFunctionsWebApplication();
 

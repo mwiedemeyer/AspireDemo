@@ -1,11 +1,13 @@
+using Azure.Messaging.ServiceBus;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
 namespace AspireDemo
 {
-    public class UserFunctions(ILogger<UserFunctions> logger, AppDbContext dbContext)
+    public class UserFunctions(ILogger<UserFunctions> logger, AppDbContext dbContext, ServiceBusClient serviceBusClient)
     {
         [Function("AddUser")]
         public async Task<IActionResult> AddUser([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
@@ -22,6 +24,10 @@ namespace AspireDemo
             await dbContext.SaveChangesAsync();
 
             logger.LogInformation("User {Id} created", user?.Entity?.Id);
+            // for demonstration of json log viewer in Aspire Dashboard
+            logger.LogWarning(JsonSerializer.Serialize(new {Message = $"User {user?.Entity?.Id} created" }));
+
+            await serviceBusClient.CreateSender("user-topic").SendMessageAsync(new ServiceBusMessage(new BinaryData(user.Entity)));
 
             return new OkObjectResult(new { Message = $"User {user?.Entity?.Id} created" });
         }
