@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="AspireDemo.AppHost/AspireDemo.AppHost.csproj" />
+  <Project Path="AspireDemo.ServiceDefaults/AspireDemo.ServiceDefaults.csproj" />
+  <Project Path="AspireDemo/AspireDemo.csproj" />
+  <Project Path="ProcessingFunction/ProcessingFunction.csproj" />
+  <Project Path="SetupDatabase/SetupDatabase.csproj" />
+</Solution>
