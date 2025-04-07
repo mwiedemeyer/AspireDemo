@@ -1,0 +1,16 @@
+@BaseUrl = http://localhost:7184/api
+
+#@name adduser
+GET {{BaseUrl}}/AddUser
+
+###
+
+@id = b8ee315e2f484066bf7af4d2f23add29
+
+###
+
+GET {{BaseUrl}}/GetUser/{{id}}
+
+###
+
+GET {{BaseUrl}}/ExceptionFunction
