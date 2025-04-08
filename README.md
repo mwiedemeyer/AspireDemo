@@ -1,0 +1,1 @@
+dotnet run --project AspireDemo.AppHost\AspireDemo.AppHost.csproj --publisher manifest --output-path ./aspire-manifest.json

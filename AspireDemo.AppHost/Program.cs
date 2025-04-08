@@ -46,4 +46,12 @@ builder.AddAzureFunctionsProject<Projects.ProcessingFunction>("func-processing")
         context.EnvironmentVariables["ConnectionStrings:sb"] = sb.Resource.ConnectionStringExpression;
     });
 
+//builder.AddNpmApp("web", "../../web", "start")
+//    .WithHttpEndpoint(targetPort: 5173)
+//    .WithExternalHttpEndpoints()
+//    .WithNpmPackageInstallation()
+//    .WithReference(api)
+//    .WaitFor(api)
+//    .WithEnvironment("VITE_API_URL", api.GetEndpoint("https"));
+
 builder.Build().Run();
